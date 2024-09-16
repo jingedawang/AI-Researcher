@@ -65,19 +65,27 @@ if __name__ == "__main__":
             organization=ORG_ID,
             api_key=OAI_KEY
         )
+        from openai import AzureOpenAI
+        client = AzureOpenAI(
+            azure_endpoint = "https://westlakeaustraliaeast.openai.azure.com/", 
+            api_key= '026d6f9678244ba0b96fbdc0770b4941',  
+            api_version="2024-02-15-preview"
+        )
 
     ## load the demo examples
     if args.method == "prompting":
-        with open("prompts/experiment_plan_examples_prompting.txt", "r") as f:
+        with open("prompts/experiment_plan_examples_prompting.txt", "r", encoding='utf-8') as f:
             demo_examples = f.read().strip()
     elif args.method == "finetuning":
         with open("prompts/experiment_plan_examples_finetuning.txt", "r") as f:
             demo_examples = f.read().strip()
     
+    print(args.idea_cache_dir + args.cache_name + ".json")
     with open(args.idea_cache_dir + args.cache_name + ".json") as f:
         idea_file = json.load(f)
     topic_description = idea_file["topic_description"]
     all_ideas = idea_file["ideas"]
+    all_ideas = all_ideas[0]
 
     if args.idea_name == "all":
         idea_names = list(all_ideas.keys())

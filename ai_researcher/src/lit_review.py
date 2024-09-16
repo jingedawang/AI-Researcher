@@ -1,4 +1,4 @@
-from openai import OpenAI
+from openai import OpenAI,AzureOpenAI
 import anthropic
 from utils import call_api, format_plan_json
 import argparse
@@ -201,6 +201,11 @@ if __name__ == "__main__":
         client = OpenAI(
             organization=ORG_ID,
             api_key=OAI_KEY
+        )
+        client = AzureOpenAI(
+            azure_endpoint = "https://westlakeaustraliaeast.openai.azure.com/", 
+            api_key= '026d6f9678244ba0b96fbdc0770b4941',  
+            api_version="2024-02-15-preview"
         )
 
     idea = {}

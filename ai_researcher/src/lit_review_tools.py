@@ -19,7 +19,8 @@ def KeywordQuery(keyword):
         'fields': 'title,year,citationCount,abstract,tldr'
     }
     headers = {'x-api-key': S2_KEY}
-    response = requests.get(search_url, params=query_params, headers = headers)
+    response = requests.get(search_url, params=query_params)
+    print(f'response: {response}')
     
     if response.status_code == 200:
         return response.json()
@@ -112,6 +113,7 @@ def parse_and_execute(output):
     if output.startswith("KeywordQuery"):
         match = re.match(r'KeywordQuery\("([^"]+)"\)', output)
         keyword = match.group(1) if match else None
+        print(f'Keyword: {keyword}')
         if keyword:
             response = KeywordQuery(keyword)
             if 'total' in response and response['total'] == 0:

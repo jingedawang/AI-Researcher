@@ -69,12 +69,18 @@ if __name__ == "__main__":
             organization=ORG_ID,
             api_key=OAI_KEY
         )
+        from openai import AzureOpenAI
+        client = AzureOpenAI(
+            azure_endpoint = "https://westlakeaustraliaeast.openai.azure.com/", 
+            api_key= '026d6f9678244ba0b96fbdc0770b4941',  
+            api_version="2024-02-15-preview"
+        )
     
     with open(args.paper_cache, "r") as f:
         lit_review = json.load(f)
     
-    topic_description = lit_review["topic_description"]
-    paper_bank = lit_review["paper_bank"]
+    topic_description = f'{lit_review[0]["title"]}. {lit_review[0]["abstract"]}'
+    paper_bank = lit_review[0]["retrieved_papers"]
 
     ## cache dir and file
     if args.RAG == "True":
@@ -85,52 +91,53 @@ if __name__ == "__main__":
         ideas_file = args.idea_cache
         print ("RAG is disabled for idea generation")
     
-    try:
-        ## extract existing ideas
-        existing_ideas = None
-        if os.path.exists(ideas_file):
-            with open(ideas_file, "r") as f:
-                ideas_cache = json.load(f)
-            if "ideas" in ideas_cache:
-                existing_ideas = [key for idea in ideas_cache["ideas"] for key in idea.keys()]
-                existing_ideas = list(set(existing_ideas))
-                existing_ideas = "; ".join(existing_ideas)
-        
-        if args.method == "prompting":
-            with open("prompts/idea_examples_prompting_method.json", "r") as f:
-                method_idea_examples = json.load(f)
-                method_idea_examples = shuffle_dict_and_convert_to_string(method_idea_examples)
-        elif args.method == "finetuning":
-            with open("prompts/idea_examples_finetuning_method.json", "r") as f:
-                method_idea_examples = json.load(f)
-                method_idea_examples = shuffle_dict_and_convert_to_string(method_idea_examples)
-        
-        print ("topic: ", topic_description)
-        print ("existing ideas: ", existing_ideas)
-        print ("\n")
-        print ("generating {} ideas...".format(str(args.ideas_n)))
-        
-        prompt, response, cost = idea_generation(args.method, existing_ideas, paper_bank, args.grounding_k, method_idea_examples, args.ideas_n, topic_description, client, args.engine, args.seed)
-        
-        print ("idea generation cost: ", cost)
+    # try:
+    ## extract existing ideas
+    existing_ideas = None
+    if os.path.exists(ideas_file):
+        with open(ideas_file, "r") as f:
+            ideas_cache = json.load(f)
+        if "ideas" in ideas_cache:
+            existing_ideas = [key for idea in ideas_cache["ideas"] for key in idea.keys()]
+            existing_ideas = list(set(existing_ideas))
+            existing_ideas = "; ".join(existing_ideas)
+    
+    if args.method == "prompting":
+        with open("prompts/idea_examples_prompting_method.json", "r", encoding='utf-8') as f:
+            method_idea_examples = json.load(f)
+            method_idea_examples = shuffle_dict_and_convert_to_string(method_idea_examples)
+    elif args.method == "finetuning":
+        with open("prompts/idea_examples_finetuning_method.json", "r") as f:
+            method_idea_examples = json.load(f)
+            method_idea_examples = shuffle_dict_and_convert_to_string(method_idea_examples)
+    
+    print ("topic: ", topic_description)
+    print ("existing ideas: ", existing_ideas)
+    print ("\n")
+    print ("generating {} ideas...".format(str(args.ideas_n)))
+    
+    prompt, response, cost = idea_generation(args.method, existing_ideas, paper_bank, args.grounding_k, method_idea_examples, args.ideas_n, topic_description, client, args.engine, args.seed)
+    
+    print ("idea generation cost: ", cost)
 
-        response = json.loads(response.strip())
-        ideas = {"topic_description": topic_description, "ideas": [response]}
-        
-        ## if the idea_cache already exists, directly add to the current list
-        if os.path.exists(ideas_file):
-            with open(ideas_file, "r") as f:
-                ideas_cache = json.load(f)
-            ideas_cache["ideas"].append(response)
-            ideas = ideas_cache
-        
-        print ("#ideas generated so far: ", sum(len(d) for d in ideas["ideas"]))
+    response = json.loads(response.strip())
+    ideas = {"topic_description": topic_description, "ideas": [response]}
+    
+    ## if the idea_cache already exists, directly add to the current list
+    if os.path.exists(ideas_file):
+        with open(ideas_file, "r") as f:
+            ideas_cache = json.load(f)
+        ideas_cache["ideas"].append(response)
+        ideas = ideas_cache
+    
+    print ("#ideas generated so far: ", sum(len(d) for d in ideas["ideas"]))
 
-        ## save the cache
-        cache_dir = os.path.dirname(ideas_file)
-        if not os.path.exists(cache_dir):
-            os.makedirs(cache_dir)
-        cache_output(ideas, ideas_file)
+    ## save the cache
+    cache_dir = os.path.dirname(ideas_file)
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
+    cache_output(ideas, ideas_file)
 
-    except: 
-        print ("Error in idea generation...")
+    # except Exception as e: 
+    #     print ("Error in idea generation...")
+    #     print(e)
