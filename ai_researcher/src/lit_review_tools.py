@@ -15,16 +15,17 @@ def KeywordQuery(keyword):
     ## retrieve papers based on keywords
     query_params = {
         'query': keyword,
-        'limit': 20,
+        # 'limit': 20,
+        'limit': 5,
         'fields': 'title,year,citationCount,abstract,tldr'
     }
     headers = {'x-api-key': S2_KEY}
-    response = requests.get(search_url, params=query_params)
-    print(f'response: {response}')
+    response = requests.get(search_url, params=query_params, headers=headers)
     
     if response.status_code == 200:
         return response.json()
     else:
+        print(f'No valid response: {response.text}')
         return None
 
 def PaperQuery(paper_id):
@@ -108,12 +109,36 @@ def paper_filter(paper_lst):
         filtered_lst.append(paper)
     return filtered_lst
 
+def parse_and_execute_ours(output):
+    if output.startswith("KeywordQuery"):
+        match = re.match(r'KeywordQuery\("([^"]+)"\)', output)
+        keyword = match.group(1) if match else None
+        # print(f'Keyword: {keyword}')
+        if keyword:
+            url = f"http://20.2.82.55:5002/paper_search_v2?search_query={keyword}&topk={20}"
+            # 发送POST请求
+            response = requests.post(url)
+            # 解析JSON响应
+            results = response.json()
+            paper_list = []
+            for result in results:
+                title = result['title']
+                abstract = result['abstract']
+                paper_id = result['id']
+                score = result['score']
+                paper_list.append({'paperId': paper_id, 'title': title, 'abstract': abstract, 'score': score})
+            return paper_list
+    print("No results found")
+    return None
+
+import retry
+@retry.retry(tries=3, delay=1, backoff=2)
 def parse_and_execute(output):
     ## parse gpt4 output and execute corresponding functions
     if output.startswith("KeywordQuery"):
         match = re.match(r'KeywordQuery\("([^"]+)"\)', output)
         keyword = match.group(1) if match else None
-        print(f'Keyword: {keyword}')
+        # print(f'Keyword: {keyword}')
         if keyword:
             response = KeywordQuery(keyword)
             if 'total' in response and response['total'] == 0:

@@ -1,0 +1,74 @@
+{
+    "hfdaily_topic_1": [
+        "2409.02877",
+        "Configurable Foundation Models: Building LLMs from a Modular Perspective"
+    ],
+    "hfdaily_topic_2": [
+        "2408.05211",
+        "VITA: Towards Open-Source Interactive Omni Multimodal LLM"
+    ],
+    "hfdaily_topic_3": [
+        "2408.07055",
+        "LongWriter: Unleashing 10,000+ Word Generation from Long Context LLMs"
+    ],
+    "hfdaily_topic_4": [
+        "2408.01800",
+        "MiniCPM-V: A GPT-4V Level MLLM on Your Phone"
+    ],
+    "hfdaily_topic_5": [
+        "2408.15545",
+        "SciLitLLM: How to Adapt LLMs for Scientific Literature Understanding"
+    ],
+    "hfdaily_topic_6": [
+        "2408.02545",
+        "RAG Foundry: A Framework for Enhancing LLMs for Retrieval Augmented  Generation"
+    ],
+    "hfdaily_topic_7": [
+        "2409.03810",
+        "How Do Your Code LLMs Perform? Empowering Code Instruction Tuning with  High-Quality Data"
+    ],
+    "hfdaily_topic_8": [
+        "2409.04109",
+        "Can LLMs Generate Novel Research Ideas? A Large-Scale Human Study with  100+ NLP Researchers"
+    ],
+    "hfdaily_topic_9": [
+        "2409.02889",
+        "LongLLaVA: Scaling Multi-modal LLMs to 1000 Images Efficiently via  Hybrid Architecture"
+    ],
+    "hfdaily_topic_10": [
+        "2409.02897",
+        "LongCite: Enabling LLMs to Generate Fine-grained Citations in  Long-context QA"
+    ],
+    "hfdaily_topic_11": [
+        "2408.08459",
+        "JPEG-LM: LLMs as Image Generators with Canonical Codec Representations"
+    ],
+    "hfdaily_topic_12": [
+        "2408.16357",
+        "Law of Vision Representation in MLLMs"
+    ],
+    "hfdaily_topic_13": [
+        "2408.15998",
+        "Eagle: Exploring The Design Space for Multimodal LLMs with Mixture of  Encoders"
+    ],
+    "hfdaily_topic_14": [
+        "2408.11796",
+        "LLM Pruning and Distillation in Practice: The Minitron Approach"
+    ],
+    "hfdaily_topic_15": [
+        "2408.08072",
+        "I-SHEEP: Self-Alignment of LLM from Scratch through an Iterative  Self-Enhancement Paradigm"
+    ],
+    "hfdaily_topic_16": [
+        "2408.11745",
+        "FocusLLM: Scaling LLM's Context by Parallel Decoding"
+    ],
+    "hfdaily_topic_17": [
+        "2408.06195",
+        "Mutual Reasoning Makes Smaller LLMs Stronger Problem-Solvers"
+    ],
+    "hfdaily_topic_18": [
+        "2409.07314",
+        "MEDIC: Towards a Comprehensive Framework for Evaluating LLMs in Clinical  Applications"
+    ]
+}

@@ -106,7 +106,7 @@ if __name__ == "__main__":
                     continue
     
     # all_ideas = all_ideas[:40]
-    print ("#ideas: ", len(all_ideas))
+    # print ("#ideas: ", len(all_ideas))
 
     if args.load_similarity_matrix:
         similarity_matrix = np.load(os.path.join(args.cache_dir, args.cache_name + "_similarity_matrix.npy"))
@@ -128,28 +128,28 @@ if __name__ == "__main__":
         avg_similarity.append(np.sum(similarity_matrix[i]) / (len(all_ideas) - 1))
 
     highest_nn_similarity = np.argmax(nn_similarity)
-    print ("Idea with Highest NN Similarity:\n", all_ideas[highest_nn_similarity])
-    print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[highest_nn_similarity]])
-    print ("\nSimilarity: ", nn_similarity[highest_nn_similarity])
+    # print ("Idea with Highest NN Similarity:\n", all_ideas[highest_nn_similarity])
+    # print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[highest_nn_similarity]])
+    # print ("\nSimilarity: ", nn_similarity[highest_nn_similarity])
 
     lowest_nn_similarity = np.argmin(nn_similarity)
-    print ("\nIdea with Lowest NN Similarity:\n", all_ideas[lowest_nn_similarity])
-    print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[lowest_nn_similarity]])
-    print ("\nSimilarity: ", nn_similarity[lowest_nn_similarity])
+    # print ("\nIdea with Lowest NN Similarity:\n", all_ideas[lowest_nn_similarity])
+    # print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[lowest_nn_similarity]])
+    # print ("\nSimilarity: ", nn_similarity[lowest_nn_similarity])
 
     highest_avg_similarity = np.argmax(avg_similarity)
-    print ("\nIdea with Highest Avg Similarity:\n", all_ideas[highest_avg_similarity])
-    print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[highest_avg_similarity]])
-    print ("\nSimilarity: ", avg_similarity[highest_avg_similarity])
+    # print ("\nIdea with Highest Avg Similarity:\n", all_ideas[highest_avg_similarity])
+    # print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[highest_avg_similarity]])
+    # print ("\nSimilarity: ", avg_similarity[highest_avg_similarity])
 
     lowest_avg_similarity = np.argmin(avg_similarity)
-    print ("\nIdea with Lowest Avg Similarity:\n", all_ideas[lowest_avg_similarity])
-    print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[lowest_avg_similarity]])
-    print ("\nSimilarity: ", avg_similarity[lowest_avg_similarity])
+    # print ("\nIdea with Lowest Avg Similarity:\n", all_ideas[lowest_avg_similarity])
+    # print ("\nMost Similar Idea:\n", all_ideas[nn_similarity_idx[lowest_avg_similarity]])
+    # print ("\nSimilarity: ", avg_similarity[lowest_avg_similarity])
 
-    print ("\n\nCorpus level metrics:")
-    print ("Avg NN Similarity: ", np.mean(nn_similarity))
-    print ("Avg Avg Similarity: ", np.mean(avg_similarity))
+    # print ("\n\nCorpus level metrics:")
+    # print ("Avg NN Similarity: ", np.mean(nn_similarity))
+    # print ("Avg Avg Similarity: ", np.mean(avg_similarity))
 
     ## print out ideas based on NN similarity intervals 
     interval = 0.05
@@ -174,9 +174,9 @@ if __name__ == "__main__":
                     break
 
     # Print one random idea pair from each bucket
-    print("\n\nIdea pairs by similarity interval:")
+    # print("\n\nIdea pairs by similarity interval:")
     for bucket in buckets:
         if buckets[bucket]:
             sampled_pair = random.choice(buckets[bucket])
-            print(f"\nInterval {bucket[0]:.2f} - {bucket[1]:.2f}:")
-            print(f"{sampled_pair[0]}\nand\n{sampled_pair[1]}\n\nSimilarity: {sampled_pair[2]:.2f}\n")
+            # print(f"\nInterval {bucket[0]:.2f} - {bucket[1]:.2f}:")
+            # print(f"{sampled_pair[0]}\nand\n{sampled_pair[1]}\n\nSimilarity: {sampled_pair[2]:.2f}\n")

@@ -1,3 +1,4 @@
+import time
 from openai import OpenAI
 from utils import call_api
 import argparse
@@ -62,14 +63,15 @@ def get_related_works(idea_name, idea, topic_description, openai_client, model, 
     _, queries, cost = paper_query(idea, openai_client, model, seed)
     total_cost += cost
     # print ("queries: \n", queries)
-    all_queries = queries.strip().split("\n")
+    all_queries = [query.strip() for query in queries.strip().split("\n") if query.strip() != ""]
     ## also add the idea name as an additional query
     all_queries.append("KeywordQuery(\"{}\")".format(idea_name + " NLP"))
 
     for query in all_queries:
-        print ("current query: ", query.strip())
+        # print ("current query: ", query.strip())
         paper_lst = parse_and_execute(query.strip())
         if paper_lst is None:
+            print(f'No papers found for query: {query}')
             continue
         paper_bank.update({paper["paperId"]: paper for paper in paper_lst})
 
@@ -94,7 +96,7 @@ def get_related_works(idea_name, idea, topic_description, openai_client, model, 
         # print (paper_bank)
         # print_top_papers_from_paper_bank(paper_bank, top_k=10)
         # print ("-----------------------------------\n")
-    
+
     ## the missing papers will have a score of 0 
     for k,v in paper_bank.items():
         if "score" not in v:

@@ -3,7 +3,7 @@ import anthropic
 from utils import call_api, format_plan_json
 import argparse
 import json
-from lit_review_tools import parse_and_execute, format_papers_for_printing, print_top_papers_from_paper_bank, dedup_paper_bank
+from lit_review_tools import parse_and_execute, parse_and_execute_ours, format_papers_for_printing, print_top_papers_from_paper_bank, dedup_paper_bank
 from utils import cache_output
 import os
 import retry
@@ -13,7 +13,7 @@ def initial_search(topic_description, openai_client, model, seed, mode="topic", 
         prompt = "You are a researcher doing literature review on the topic of " + topic_description.strip() + ".\n"
         prompt += "You should propose some keywords for using the Semantic Scholar API to find the most relevant papers to this topic. "
     elif mode == "idea":
-        prompt = "You are a professor in Natural Language Processing. You need to evaluate the novelty of a proposed research idea.\n"
+        prompt = "You are a professor in Natural Language Processing, Large Language Models and Computer Vision. You need to evaluate the novelty of a proposed research idea.\n"
         prompt += "The idea is:\n" + format_plan_json(idea) + "\n\n"
         prompt += "You want to do a round of paper search in order to find out whether the proposed project has already been done. "
         prompt += "You should propose some keywords for using the Semantic Scholar API to find the most relevant papers to this proposed idea. "
@@ -30,7 +30,7 @@ def next_query(topic_description, openai_client, model, seed, grounding_papers, 
     if mode == "topic":
         prompt = "You are a researcher doing literature review on the topic of " + topic_description.strip() + ".\n" + "You should propose some queries for using the Semantic Scholar API to find the most relevant papers to this topic. "
     elif mode == "idea":
-        prompt = "You are a professor in Natural Language Processing. You need to evaluate the novelty of a proposed research idea.\n"
+        prompt = "You are a professor in Natural Language Processing, Large Language Models and Computer Vision. You need to evaluate the novelty of a proposed research idea.\n"
         prompt += "The idea is:\n" + format_plan_json(idea) + "\n\n"
         prompt += "You want to do a round of paper search in order to find out whether the proposed project has already been done. "
         prompt += "You should propose some queries for using the Semantic Scholar API to find the most relevant papers to this proposed idea. "
@@ -83,7 +83,8 @@ def collect_papers(topic_description, openai_client, model, seed, grounding_k = 
     _, query, cost = initial_search(topic_description, openai_client, model, seed, mode=mode, idea=idea)
     total_cost += cost
     all_queries.append(query)
-    paper_lst = parse_and_execute(query)
+    # paper_lst = parse_and_execute(query)
+    paper_lst = parse_and_execute_ours(query)
     if paper_lst:
         ## filter out those with incomplete abstracts
         paper_lst = [paper for paper in paper_lst if paper["abstract"] and len(paper["abstract"].split()) > 50]
@@ -127,7 +128,8 @@ def collect_papers(topic_description, openai_client, model, seed, grounding_k = 
         if print_all:
             print ("new query: ", new_query)
         try:
-            paper_lst = parse_and_execute(new_query)
+            # paper_lst = parse_and_execute(new_query)
+            paper_lst = parse_and_execute_ours(new_query)
         except:
             paper_lst = None 
         
@@ -204,7 +206,7 @@ if __name__ == "__main__":
         )
         client = AzureOpenAI(
             azure_endpoint = "https://westlakeaustraliaeast.openai.azure.com/", 
-            api_key= '026d6f9678244ba0b96fbdc0770b4941',  
+            api_key= os.environ["AZURE_API_KEY"],  
             api_version="2024-02-15-preview"
         )
 
@@ -219,9 +221,9 @@ if __name__ == "__main__":
 
     paper_bank, total_cost, all_queries = collect_papers(topic_description, client, args.engine, args.seed, args.grounding_k, max_papers=args.max_paper_bank_size, print_all=args.print_all, mode=args.mode, idea=idea)
     output = format_papers_for_printing(paper_bank[ : 10])
-    print ("Top 10 papers: ")
-    print (output)
-    print ("Total cost: ", total_cost)
+    # print ("Top 10 papers: ")
+    # print (output)
+    # print ("Total cost: ", total_cost)
 
     if args.cache_name:
         cache_dir = os.path.dirname(args.cache_name)

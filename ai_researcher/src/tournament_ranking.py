@@ -14,7 +14,7 @@ random.seed(2024)
 
 @retry.retry(tries=3, delay=2)
 def better_idea(idea_1, idea_2, method, openai_client, model, seed, few_shot_demos=None, temperature=0.):
-    prompt = "You are a reviewer specialized in Natural Language Processing and Large Language Models. You are given two project summaries. One of them is accepted by a top AI conference (like ICLR or ACL) and the other one is rejected. Your task is to identify the one that has been accepted.\n"
+    prompt = "You are a reviewer specialized in Natural Language Processing, Large Language Models and Computer Vision. You are given two project summaries. One of them is accepted by a top AI conference (like ICLR or ACL) and the other one is rejected. Your task is to identify the one that has been accepted.\n"
     
     ## zero-shot methods
     if "zero_shot" in method:

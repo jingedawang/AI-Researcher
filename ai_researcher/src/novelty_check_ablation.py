@@ -52,62 +52,6 @@ def novelty_score(experiment_plan, related_paper, openai_client, model, seed):
     response, cost = call_api(openai_client, model, prompt_messages, temperature=0., max_tokens=1000, seed=seed, json_output=False)
     return prompt, response, cost
 
-
-@retry.retry(tries=3, delay=2)
-def novelty_check(idea_name, idea, topic_description, openai_client, model, seed):
-    paper_bank = {}
-    total_cost = 0
-    all_queries = []
-
-    ## get KeywordSearch queries
-    _, queries, cost = paper_query(idea, topic_description, openai_client, model, seed)
-    total_cost += cost
-    # print ("queries: \n", queries)
-    all_queries = queries.strip().split("\n")
-    ## also add the idea name as an additional query
-    all_queries.append("KeywordQuery(\"{}\")".format(idea_name + " NLP"))
-
-    for query in all_queries:
-        paper_lst = parse_and_execute(query.strip())
-        if paper_lst is None:
-            continue
-        paper_bank.update({paper["paperId"]: paper for paper in paper_lst})
-
-        ## score each paper
-        prompt, response, cost = paper_scoring(paper_lst, idea, topic_description, openai_client, model, seed)
-        total_cost += cost
-        response = json.loads(response.strip())
-
-        ## initialize all scores to 0 then fill in gpt4 scores
-        for k,v in response.items():
-            if k in paper_bank:
-                paper_bank[k]["score"] = v
-        
-        ## the missing papers will have a score of 0 
-        for k,v in paper_bank.items():
-            if "score" not in v:
-                v["score"] = 0
-            
-        # print (paper_bank)
-        print_top_papers_from_paper_bank(paper_bank, top_k=10)
-        print ("-----------------------------------\n")
-    
-    ## the missing papers will have a score of 0 
-    for k,v in paper_bank.items():
-        if "score" not in v:
-            v["score"] = 0
-    
-    ## rank all papers by score
-    data_list = [{'id': id, **info} for id, info in paper_bank.items()]
-    sorted_papers = sorted(data_list, key=lambda x: x['score'], reverse=True)
-    sorted_data = dedup_paper_bank(sorted_data)
-
-    ## novelty score
-    prompt, novelty, cost = novelty_score(sorted_papers, idea, openai_client, model, seed)
-    # print (prompt, novelty)
-
-    return novelty, sorted_papers, total_cost, all_queries
-
 import requests
 def search_papers_according_to_query(search_query, rank_doc=None, topk=10, ip_address="http://20.2.82.55:5002/"):
     """
@@ -128,37 +72,27 @@ def search_papers_according_to_query(search_query, rank_doc=None, topk=10, ip_ad
     result = response.json()
     return result
 
-def compute_novelty_for_an_idea(cache_dir, cache_name, topic_description, source: str, client, engine='gpt-4o', seed=2024, check_n=5):
-    if not os.path.isdir(cache_dir + cache_name):
-        print(f"Cache directory {cache_dir + cache_name} does not exist")
+def compute_novelty_for_an_idea(cache_dir, topic, topic_description, source: str, client, engine='gpt-4o', seed=2024, check_n=5):
+    if not os.path.isdir(cache_dir):
+        print(f"Cache directory {cache_dir} does not exist")
         return None
-    filenames = os.listdir(cache_dir + cache_name)
+    filenames = os.listdir(cache_dir)
     # # Use only 10 files for testing
     # filenames = filenames[:10]
     if len(filenames) == 0:
-        print(f"No files found in {cache_dir + cache_name}")
+        print(f"No files found in {cache_dir}")
         return None
     novel_idea = 0
-    for filename in tqdm(filenames, desc=f'Computing novelty for {cache_name} with {source}'):
-        cache_file = os.path.join(cache_dir + cache_name + "/" + filename)
+    for filename in tqdm(filenames, desc=f'Computing novelty for {topic} with {source}'):
+        cache_file = os.path.join(cache_dir + "/" + filename)
         print(f'Processing {cache_file}')
         with open(cache_file, "r") as f:
             idea_file = json.load(f)
-        if source == 'ai_researcher':
-            idea_name = idea_file["idea_name"]
-            if len(idea_file["full_experiment_plan"].keys()) == 1:
-                idea = list(idea_file["full_experiment_plan"].values())[0]
-            else:
-                idea = idea_file["full_experiment_plan"]
-        elif source == 'ours':
-            idea_name = list(idea_file['initial_proposal'].keys())[0]
-            if not idea_file['final_proposal']:
-                print(f'Found null final proposal for {cache_name}/{filename}')
-                continue
-            if idea_file['final_proposal']['final_proposal'] and len(idea_file['final_proposal']['final_proposal'].keys()) == 1:
-                idea = list(idea_file['final_proposal'].values())[0]
-            else:
-                idea = idea_file["final_proposal"]['final_proposal']
+        idea_name = list(idea_file['initial_proposal'].keys())[0]
+        if idea_file['final_proposal']['final_proposal'] and len(idea_file['final_proposal']['final_proposal'].keys()) == 1:
+            idea = list(idea_file['final_proposal'].values())[0]
+        else:
+            idea = idea_file["final_proposal"]['final_proposal']
 
         if "novelty_papers" not in idea_file:
             # print ("Retrieving related works...")
@@ -174,8 +108,8 @@ def compute_novelty_for_an_idea(cache_dir, cache_name, topic_description, source
             # print ("Total cost: ", total_cost)
 
             ## save the paper bank
-            if not os.path.exists(cache_dir + cache_name + "/"):
-                os.makedirs(cache_dir + cache_name + "/")
+            if not os.path.exists(cache_dir + "/"):
+                os.makedirs(cache_dir + "/")
             # idea_file["novelty_queries"] = all_queries
             idea_file["novelty_papers"] = paper_bank
             cache_output(idea_file, cache_file)
@@ -261,33 +195,36 @@ if __name__ == "__main__":
         api_version="2024-02-15-preview"
     )
     
-    conference = args.conference
+    conference = args.topic.split('_', 1)[0]
+    if conference == 'topic':
+        conference = 'acl'
 
-    cache_dir_for_ai_researcher = "../cache_results_test/project_proposals_20240928_original_faiss_55_all/"
-    cache_dir_for_ours = f"../experiment_result/test/{conference}/"
+    cache_dir = f"../experiment_result/ours_v2_ablation/without_plan_but_retrieve/{conference}/"
 
-    with open(f'../{conference}_id_map.json') as f:
-        conference_id_map = json.load(f)
+    with open(f'../filtered_id_maps.json') as f:
+        id_map = json.load(f)
     
     # Clean novelty cache
     if args.clean_cache:
-        for topic in tqdm(conference_id_map.keys(), desc=f'Cleaning novelty cache for {conference}'):
-            clean_novelty_cache(cache_dir_for_ai_researcher + topic + "/")
-            clean_novelty_cache(cache_dir_for_ours + conference_id_map[topic][0] + "/step_3_final_proposal_wi_method_decom/")
+        for topic in tqdm(id_map.keys(), desc=f'Cleaning novelty cache for {conference}'):
+            clean_novelty_cache(cache_dir + id_map[topic][0] + "/step_0_final_proposal_wi_method_decom_v2/")
+            clean_novelty_cache(cache_dir + id_map[topic][0] + "/step_1_final_proposal_wi_method_decom_v2/")
+            clean_novelty_cache(cache_dir + id_map[topic][0] + "/step_2_final_proposal_wi_method_decom_v2/")
+            clean_novelty_cache(cache_dir + id_map[topic][0] + "/step_3_final_proposal_wi_method_decom_v2/")
         print("Novelty cache cleaned")
         exit()
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         futures = {}
-        for topic, value in conference_id_map.items():
+        for topic, value in id_map.items():
             if args.topic:
                 if topic != args.topic:
                     continue
             arxiv_id = value[0]
             topic_description = value[1]
 
-            if os.path.exists(f'novelty_score_summarys_test/{topic}.json'):
-                novelty_score_summary = json.load(open(f'novelty_score_summarys_test/{topic}.json'))
+            if os.path.exists(f'novelty_score_summarys_ablation_without_plan_but_retrieve/{topic}.json'):
+                novelty_score_summary = json.load(open(f'novelty_score_summarys_ablation_without_plan_but_retrieve/{topic}.json'))
             else:
                 novelty_score_summary = {
                     'acl': {},
@@ -295,24 +232,49 @@ if __name__ == "__main__":
                     'cvpr': {},
                     'hfdaily': {}
                 }
+            
+            step_0_cache_dir = cache_dir + arxiv_id + "/step_0_final_proposal_wi_method_decom_v2/"
+            step_1_cache_dir = cache_dir + arxiv_id + "/step_1_final_proposal_wi_method_decom_v2/"
+            step_2_cache_dir = cache_dir + arxiv_id + "/step_2_final_proposal_wi_method_decom_v2/"
+            step_3_cache_dir = cache_dir + arxiv_id + "/step_3_final_proposal_wi_method_decom_v2/"
+
+            # Check if the step cache folder is empty
+            if not os.path.exists(step_0_cache_dir) or len(os.listdir(step_0_cache_dir)) == 0:
+                print(f"Step 0 cache directory {step_0_cache_dir} does not exist or is empty")
+                continue
+            if not os.path.exists(step_1_cache_dir) or len(os.listdir(step_1_cache_dir)) == 0:
+                print(f"Step 1 cache directory {step_1_cache_dir} does not exist or is empty")
+                continue
+            if not os.path.exists(step_2_cache_dir) or len(os.listdir(step_2_cache_dir)) == 0:
+                print(f"Step 2 cache directory {step_2_cache_dir} does not exist or is empty")
+                continue
+            if not os.path.exists(step_3_cache_dir) or len(os.listdir(step_3_cache_dir)) == 0:
+                print(f"Step 3 cache directory {step_3_cache_dir} does not exist or is empty")
+                continue
 
             if topic not in novelty_score_summary[conference]:
                 novelty_score_summary[conference][topic] = {
                     'arxiv_id': arxiv_id
                 }
-            if 'ai_researcher' not in novelty_score_summary[conference][topic]:
-                future = executor.submit(compute_novelty_for_an_idea, cache_dir_for_ai_researcher, topic, topic_description, 'ai_researcher', client, args.engine)
-                futures[future] = [topic, 'ai_researcher']
-            if 'ours' not in novelty_score_summary[conference][topic]:
-                future = executor.submit(compute_novelty_for_an_idea, cache_dir_for_ours, f'{arxiv_id}/step_3_final_proposal_wi_method_decom', topic_description, 'ours', client, args.engine)
-                futures[future] = [topic, 'ours']
-            json.dump(novelty_score_summary, open(f'novelty_score_summarys_test/{topic}.json', 'w'), indent=4, ensure_ascii=False)
+            if 'step_0' not in novelty_score_summary[conference][topic]:
+                future = executor.submit(compute_novelty_for_an_idea, step_0_cache_dir, topic, topic_description, 'step_0', client, args.engine)
+                futures[future] = [topic, 'step_0']
+            if 'step_1' not in novelty_score_summary[conference][topic]:
+                future = executor.submit(compute_novelty_for_an_idea, step_1_cache_dir, topic, topic_description, 'step_1', client, args.engine)
+                futures[future] = [topic, 'step_1']
+            if 'step_2' not in novelty_score_summary[conference][topic]:
+                future = executor.submit(compute_novelty_for_an_idea, step_2_cache_dir, topic, topic_description, 'step_2', client, args.engine)
+                futures[future] = [topic, 'step_2']
+            if 'step_3' not in novelty_score_summary[conference][topic]:
+                future = executor.submit(compute_novelty_for_an_idea, step_3_cache_dir, topic, topic_description, 'step_3', client, args.engine)
+                futures[future] = [topic, 'step_3']
+            json.dump(novelty_score_summary, open(f'novelty_score_summarys_ablation_without_plan_but_retrieve/{topic}.json', 'w'), indent=4, ensure_ascii=False)
 
         for future in concurrent.futures.as_completed(futures):
             topic, source = futures[future]
 
-            if os.path.exists(f'novelty_score_summarys_test/{topic}.json'):
-                novelty_score_summary = json.load(open(f'novelty_score_summarys_test/{topic}.json'))
+            if os.path.exists(f'novelty_score_summarys_ablation_without_plan_but_retrieve/{topic}.json'):
+                novelty_score_summary = json.load(open(f'novelty_score_summarys_ablation_without_plan_but_retrieve/{topic}.json'))
             else:
                 novelty_score_summary = {
                     'acl': {},
@@ -326,7 +288,7 @@ if __name__ == "__main__":
             if score:
                 novelty_score_summary[conference][topic][source] = score
                 print(f'Novelty score for {conference} - {topic} - {source}: {score}')
-                json.dump(novelty_score_summary, open(f'novelty_score_summarys_test/{topic}.json', 'w'), indent=4, ensure_ascii=False)
+                json.dump(novelty_score_summary, open(f'novelty_score_summarys_ablation_without_plan_but_retrieve/{topic}.json', 'w'), indent=4, ensure_ascii=False)
             # except Exception as e:
             #     print(f'Novelty score for {conference} - {topic} - {source} failed with error: {e}')
     

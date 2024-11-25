@@ -93,7 +93,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     model = SentenceTransformer("all-MiniLM-L6-v2")
-    print ("Similarity Threshold: ", args.similarity_threshold)
+    # print ("Similarity Threshold: ", args.similarity_threshold)
 
     all_ideas = []
     all_idea_ks = []
@@ -112,7 +112,7 @@ if __name__ == "__main__":
                     continue
     
     # all_ideas = all_ideas[:40]
-    print ("#original ideas: ", len(all_ideas))
+    # print ("#original ideas: ", len(all_ideas))
 
     similarity_matrix = np.load(os.path.join(args.cache_dir, args.cache_name + "_similarity_matrix.npy"))
     if len(similarity_matrix) != len(all_ideas):
@@ -131,7 +131,7 @@ if __name__ == "__main__":
                 if j not in filter_idx and similarity_matrix[i][j] > args.similarity_threshold or all_idea_ks[j] == all_idea_ks[i]:
                     filter_idx.append(j)
     
-    print ("#final ideas: ", len(final_ideas))
+    # print ("#final ideas: ", len(final_ideas))
 
     final_json = {}
     final_json["topic_description"] = topic 

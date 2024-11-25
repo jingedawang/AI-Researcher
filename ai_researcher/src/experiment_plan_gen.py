@@ -14,7 +14,7 @@ random.seed(2024)
 def plan_generation_method(method, idea, demo_examples, topic_description, openai_client, model, seed):
     ## forumate an idea from a paragraph into a full experiment plan based on our template
 
-    prompt = "You are an expert researcher in Natural Language Processing and your job is to expand a brief project idea into a full project proposal with detailed experiment plans so that your students can follow the steps and execute the full project. I will provide you with an idea on the topic of: " + topic_description + ".\n\n"
+    prompt = "You are an expert researcher in Natural Language Processing, Large Language Models and Computer Vision, and your job is to expand a brief project idea into a full project proposal with detailed experiment plans so that your students can follow the steps and execute the full project. I will provide you with an idea on the topic of: " + topic_description + ".\n\n"
     prompt += "The idea is:\n" + format_plan_json(idea) + "\n"
     prompt += "Now you should come up with the full experiment plan covering:\n"
     prompt += "1. Title: A concise statement of the main research question to be used as the paper title.\n"
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         from openai import AzureOpenAI
         client = AzureOpenAI(
             azure_endpoint = "https://westlakeaustraliaeast.openai.azure.com/", 
-            api_key= '026d6f9678244ba0b96fbdc0770b4941',  
+            api_key= os.environ["AZURE_API_KEY"],  
             api_version="2024-02-15-preview"
         )
 
@@ -80,12 +80,11 @@ if __name__ == "__main__":
         with open("prompts/experiment_plan_examples_finetuning.txt", "r") as f:
             demo_examples = f.read().strip()
     
-    print(args.idea_cache_dir + args.cache_name + ".json")
+    # print(args.idea_cache_dir + args.cache_name + ".json")
     with open(args.idea_cache_dir + args.cache_name + ".json") as f:
         idea_file = json.load(f)
     topic_description = idea_file["topic_description"]
     all_ideas = idea_file["ideas"]
-    all_ideas = all_ideas[0]
 
     if args.idea_name == "all":
         idea_names = list(all_ideas.keys())
@@ -96,7 +95,7 @@ if __name__ == "__main__":
         os.makedirs(args.experiment_plan_cache_dir + args.cache_name + "/")
         
     all_costs = 0
-    for idea_name in tqdm(idea_names):
+    for idea_name in tqdm(idea_names, desc=f"Generating Experiment Plans for {args.cache_name}"):
         cache_file = os.path.join(args.experiment_plan_cache_dir + args.cache_name + "/" + '_'.join(idea_name.lower().split()) + ".json")
         
         try:            
@@ -105,12 +104,12 @@ if __name__ == "__main__":
             idea_file["idea_name"] = idea_name
             idea_file["raw_idea"] = all_ideas[idea_name]
 
-            print ("working on: ", idea_name)
+            # print ("working on: ", idea_name)
             idea = all_ideas[idea_name]
             
             prompt, response, cost = plan_generation_method(args.method, idea, demo_examples, topic_description, client, args.engine, args.seed)
             # print (response)
-            print ("cost: ", cost)
+            # print ("cost: ", cost)
 
             all_costs += cost
             experiment_plan = json.loads(response.strip())
@@ -121,6 +120,6 @@ if __name__ == "__main__":
         except: 
             print ("error in generating experiment plan for idea: ", idea_name)
     
-    print ("Total cost: ", all_costs)
+    # print ("Total cost: ", all_costs)
 
     

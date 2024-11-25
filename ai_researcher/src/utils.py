@@ -14,6 +14,9 @@ def calc_price(model, usage):
     if model == "gpt-4o":
         return (0.005 * usage.prompt_tokens + 0.015 * usage.completion_tokens) / 1000.0
 
+import openai
+from retry import retry
+@retry(openai.RateLimitError, tries=6, delay=1, backoff=2)
 def call_api(client, model, prompt_messages, temperature=1.0, max_tokens=100, seed=2024, json_output=False):
     if "claude" in model:
         if json_output:

@@ -1,0 +1,438 @@
+{
+    "iclr_topic_1": [
+        "2309.17102",
+        "Guiding Instruction-based Image Editing via Multimodal Large Language  Models"
+    ],
+    "iclr_topic_2": [
+        "2401.15024",
+        "SliceGPT: Compress Large Language Models by Deleting Rows and Columns"
+    ],
+    "iclr_topic_3": [
+        "2310.01798",
+        "Large Language Models Cannot Self-Correct Reasoning Yet"
+    ],
+    "iclr_topic_4": [
+        "2308.08241",
+        "TEST: Text Prototype Aligned Embedding to Activate LLM's Ability for  Time Series"
+    ],
+    "iclr_topic_5": [
+        "2309.10691",
+        "MINT: Evaluating LLMs in Multi-turn Interaction with Tools and Language  Feedback"
+    ],
+    "iclr_topic_6": [
+        "2401.07004",
+        "Extending LLMs' Context Window with 100 Samples"
+    ],
+    "iclr_topic_7": [
+        "2308.00436",
+        "SelfCheck: Using LLMs to Zero-Shot Check Their Own Step-by-Step  Reasoning"
+    ],
+    "iclr_topic_8": [
+        "2409.04827",
+        "Incorporate LLMs with Influential Recommender System"
+    ],
+    "iclr_topic_9": [
+        "2312.01552",
+        "The Unlocking Spell on Base LLMs: Rethinking Alignment via In-Context  Learning"
+    ],
+    "iclr_topic_10": [
+        "2310.08041",
+        "QLLM: Accurate and Efficient Low-Bitwidth Quantization for Large  Language Models"
+    ],
+    "iclr_topic_11": [
+        "2309.16292",
+        "DiLu: A Knowledge-Driven Approach to Autonomous Driving with Large  Language Models"
+    ],
+    "iclr_topic_12": [
+        "2305.15852",
+        "Self-contradictory Hallucinations of Large Language Models: Evaluation,  Detection and Mitigation"
+    ],
+    "iclr_topic_13": [
+        "2309.15840",
+        "How to Catch an AI Liar: Lie Detection in Black-Box LLMs by Asking  Unrelated Questions"
+    ],
+    "iclr_topic_14": [
+        "2310.08915",
+        "Dynamic Sparse No Training: Training-Free Fine-tuning for Sparse LLMs"
+    ],
+    "iclr_topic_15": [
+        "2310.17884",
+        "Can LLMs Keep a Secret? Testing Privacy Implications of Language Models  via Contextual Integrity Theory"
+    ],
+    "iclr_topic_16": [
+        "2402.17193",
+        "When Scaling Meets LLM Finetuning: The Effect of Data, Model and  Finetuning Method"
+    ],
+    "iclr_topic_17": [
+        "2309.07875",
+        "Safety-Tuned LLaMAs: Lessons From Improving the Safety of Large Language  Models that Follow Instructions"
+    ],
+    "iclr_topic_18": [
+        "2404.07424",
+        "CopilotCAD: Empowering Radiologists with Report Completion Models and  Quantitative Evidence from Medical Image Foundation Models"
+    ],
+    "iclr_topic_19": [
+        "2309.12307",
+        "LongLoRA: Efficient Fine-tuning of Long-Context Large Language Models"
+    ],
+    "iclr_topic_20": [
+        "2309.12284",
+        "MetaMath: Bootstrap Your Own Mathematical Questions for Large Language  Models"
+    ],
+    "iclr_topic_21": [
+        "2309.15074",
+        "Natural Language based Context Modeling and Reasoning for Ubiquitous  Computing with Large Language Models: A Tutorial"
+    ],
+    "iclr_topic_22": [
+        "2306.13063",
+        "Can LLMs Express Their Uncertainty? An Empirical Evaluation of  Confidence Elicitation in LLMs"
+    ],
+    "iclr_topic_23": [
+        "2408.06610",
+        "CROME: Cross-Modal Adapters for Efficient Multimodal LLM"
+    ],
+    "iclr_topic_24": [
+        "2309.17410",
+        "Can Sensitive Information Be Deleted From LLMs? Objectives for Defending  Against Extraction Attacks"
+    ],
+    "iclr_topic_25": [
+        "2310.01361",
+        "GenSim: Generating Robotic Simulation Tasks via Large Language Models"
+    ],
+    "iclr_topic_26": [
+        "2308.07074",
+        "#InsTag: Instruction Tagging for Analyzing Supervised Fine-tuning of  Large Language Models"
+    ],
+    "iclr_topic_27": [
+        "2406.18746",
+        "Lifelong Robot Library Learning: Bootstrapping Composable and  Generalizable Skills for Embodied Control with Language Models"
+    ],
+    "iclr_topic_28": [
+        "2409.02244",
+        "Therapy as an NLP Task: Psychologists' Comparison of LLMs and Human  Peers in CBT"
+    ],
+    "iclr_topic_29": [
+        "2310.00034",
+        "PB-LLM: Partially Binarized Large Language Models"
+    ],
+    "iclr_topic_30": [
+        "2310.13227",
+        "ToolChain*: Efficient Action Space Navigation in Large Language Models  with A* Search"
+    ],
+    "iclr_topic_31": [
+        "2309.11998",
+        "LMSYS-Chat-1M: A Large-Scale Real-World LLM Conversation Dataset"
+    ],
+    "iclr_topic_32": [
+        "2309.08532",
+        "Connecting Large Language Models with Evolutionary Algorithms Yields  Powerful Prompt Optimizers"
+    ],
+    "iclr_topic_33": [
+        "2306.03078",
+        "SpQR: A Sparse-Quantized Representation for Near-Lossless LLM Weight  Compression"
+    ],
+    "iclr_topic_34": [
+        "2408.10174",
+        "SMILE: Zero-Shot Sparse Mixture of Low-Rank Experts Construction From  Pre-Trained Foundation Models"
+    ],
+    "iclr_topic_35": [
+        "2401.02412",
+        "LLM Augmented LLMs: Expanding Capabilities through Composition"
+    ],
+    "iclr_topic_36": [
+        "2303.16199",
+        "LLaMA-Adapter: Efficient Fine-tuning of Language Models with Zero-init  Attention"
+    ],
+    "iclr_topic_37": [
+        "2310.08659",
+        "LoftQ: LoRA-Fine-Tuning-Aware Quantization for Large Language Models"
+    ],
+    "iclr_topic_38": [
+        "2406.03699",
+        "M-QALM: A Benchmark to Assess Clinical Reading Comprehension and  Knowledge Recall in Large Language Models via Question Answering"
+    ],
+    "iclr_topic_39": [
+        "2409.06927",
+        "Representation Tuning"
+    ],
+    "iclr_topic_40": [
+        "2305.13269",
+        "Chain-of-Knowledge: Grounding Large Language Models via Dynamic  Knowledge Adapting over Heterogeneous Sources"
+    ],
+    "iclr_topic_41": [
+        "2408.14387",
+        "Reprogramming Foundational Large Language Models(LLMs) for Enterprise  Adoption for Spatio-Temporal Forecasting Applications: Unveiling a New Era in  Copilot-Guided Cross-Modal Time Series Representation Learning"
+    ],
+    "iclr_topic_42": [
+        "2310.01801",
+        "Model Tells You What to Discard: Adaptive KV Cache Compression for LLMs"
+    ],
+    "iclr_topic_43": [
+        "2402.19464",
+        "Curiosity-driven Red-teaming for Large Language Models"
+    ],
+    "iclr_topic_44": [
+        "2311.04892",
+        "Bias Runs Deep: Implicit Reasoning Biases in Persona-Assigned LLMs"
+    ],
+    "iclr_topic_45": [
+        "2310.06452",
+        "Understanding the Effects of RLHF on LLM Generalisation and Diversity"
+    ],
+    "iclr_topic_46": [
+        "2309.11499",
+        "DreamLLM: Synergistic Multimodal Comprehension and Creation"
+    ],
+    "iclr_topic_47": [
+        "2310.06117",
+        "Take a Step Back: Evoking Reasoning via Abstraction in Large Language  Models"
+    ],
+    "iclr_topic_48": [
+        "2310.06213",
+        "GeoLLM: Extracting Geospatial Knowledge from Large Language Models"
+    ],
+    "iclr_topic_49": [
+        "2309.10400",
+        "PoSE: Efficient Context Window Extension of LLMs via Positional  Skip-wise Training"
+    ],
+    "iclr_topic_50": [
+        "2305.19523",
+        "Harnessing Explanations: LLM-to-LM Interpreter for Enhanced  Text-Attributed Graph Representation Learning"
+    ],
+    "iclr_topic_51": [
+        "2308.03279",
+        "UniversalNER: Targeted Distillation from Large Language Models for Open  Named Entity Recognition"
+    ],
+    "iclr_topic_52": [
+        "2304.10592",
+        "MiniGPT-4: Enhancing Vision-Language Understanding with Advanced Large  Language Models"
+    ],
+    "iclr_topic_53": [
+        "2309.03883",
+        "DoLa: Decoding by Contrasting Layers Improves Factuality in Large  Language Models"
+    ],
+    "iclr_topic_54": [
+        "2310.12931",
+        "Eureka: Human-Level Reward Design via Coding Large Language Models"
+    ],
+    "iclr_topic_55": [
+        "2306.05836",
+        "Can Large Language Models Infer Causation from Correlation?"
+    ],
+    "iclr_topic_56": [
+        "2404.04442",
+        "Exploring Autonomous Agents through the Lens of Large Language Models: A  Review"
+    ],
+    "iclr_topic_57": [
+        "2308.06463",
+        "GPT-4 Is Too Smart To Be Safe: Stealthy Chat with LLMs via Cipher"
+    ],
+    "iclr_topic_58": [
+        "2310.03128",
+        "MetaTool Benchmark for Large Language Models: Deciding Whether to Use  Tools and Which to Use"
+    ],
+    "iclr_topic_59": [
+        "2310.04668",
+        "Label-free Node Classification on Graphs with Large Language Models  (LLMS)"
+    ],
+    "iclr_topic_60": [
+        "2401.12242",
+        "BadChain: Backdoor Chain-of-Thought Prompting for Large Language Models"
+    ],
+    "iclr_topic_61": [
+        "2310.03731",
+        "MathCoder: Seamless Code Integration in LLMs for Enhanced Mathematical  Reasoning"
+    ],
+    "iclr_topic_62": [
+        "2310.04564",
+        "ReLU Strikes Back: Exploiting Activation Sparsity in Large Language  Models"
+    ],
+    "iclr_topic_63": [
+        "2401.05861",
+        "Towards Boosting Many-to-Many Multilingual Machine Translation with  Large Language Models"
+    ],
+    "iclr_topic_64": [
+        "2308.07201",
+        "ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate"
+    ],
+    "iclr_topic_65": [
+        "2407.10805",
+        "Think-on-Graph 2.0: Deep and Interpretable Large Language Model  Reasoning with Knowledge Graph-guided Retrieval"
+    ],
+    "iclr_topic_66": [
+        "2404.14662",
+        "NExT: Teaching Large Language Models to Reason about Code Execution"
+    ],
+    "iclr_topic_67": [
+        "2311.04661",
+        "Massive Editing for Large Language Models via Meta Learning"
+    ],
+    "iclr_topic_68": [
+        "2310.00902",
+        "DataInf: Efficiently Estimating Data Influence in LoRA-tuned LLMs and  Diffusion Models"
+    ],
+    "iclr_topic_69": [
+        "2409.08087",
+        "Securing Large Language Models: Addressing Bias, Misinformation, and  Prompt Attacks"
+    ],
+    "iclr_topic_70": [
+        "2306.08568",
+        "WizardCoder: Empowering Code Large Language Models with Evol-Instruct"
+    ],
+    "iclr_topic_71": [
+        "2405.14604",
+        "A Watermark for Low-entropy and Unbiased Generation in Large Language  Models"
+    ],
+    "iclr_topic_72": [
+        "2306.08543",
+        "MiniLLM: Knowledge Distillation of Large Language Models"
+    ],
+    "iclr_topic_73": [
+        "2310.03016",
+        "Understanding In-Context Learning in Transformers and LLMs by Learning  to Learn Discrete Functions"
+    ],
+    "iclr_topic_74": [
+        "2409.08234",
+        "LLM Honeypot: Leveraging Large Language Models as Advanced Interactive  Honeypot Systems"
+    ],
+    "iclr_topic_75": [
+        "2306.08018",
+        "Mol-Instructions: A Large-Scale Biomolecular Instruction Dataset for  Large Language Models"
+    ],
+    "iclr_topic_76": [
+        "2310.02992",
+        "Kosmos-G: Generating Images in Context with Multimodal Large Language  Models"
+    ],
+    "iclr_topic_77": [
+        "2306.09296",
+        "KoLA: Carefully Benchmarking World Knowledge of Large Language Models"
+    ],
+    "iclr_topic_78": [
+        "2310.07298",
+        "Beyond Memorization: Violating Privacy Via Inference with Large Language  Models"
+    ],
+    "iclr_topic_79": [
+        "2309.17428",
+        "CRAFT: Customizing LLMs by Creating and Retrieving from Specialized  Toolsets"
+    ],
+    "iclr_topic_80": [
+        "2407.17029",
+        "Accurate and Efficient Fine-Tuning of Quantized Large Language Models  Through Optimal Balance"
+    ],
+    "iclr_topic_81": [
+        "2305.13300",
+        "Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large  Language Models in Knowledge Conflicts"
+    ],
+    "iclr_topic_82": [
+        "2310.00785",
+        "BooookScore: A systematic exploration of book-length summarization in  the era of LLMs"
+    ],
+    "iclr_topic_83": [
+        "2307.16789",
+        "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world  APIs"
+    ],
+    "iclr_topic_84": [
+        "2409.06433",
+        "Fine-tuning and Prompt Engineering with Cognitive Knowledge Graphs for  Scholarly Knowledge Organization"
+    ],
+    "iclr_topic_85": [
+        "2311.03734",
+        "Leveraging Structured Information for Explainable Multi-hop Question  Answering and Reasoning"
+    ],
+    "iclr_topic_86": [
+        "2307.02485",
+        "Building Cooperative Embodied Agents Modularly with Large Language  Models"
+    ],
+    "iclr_topic_87": [
+        "2402.03744",
+        "INSIDE: LLMs' Internal States Retain the Power of Hallucination  Detection"
+    ],
+    "iclr_topic_88": [
+        "2308.07124",
+        "OctoPack: Instruction Tuning Code Large Language Models"
+    ],
+    "iclr_topic_89": [
+        "2406.09455",
+        "Pandora: Towards General World Model with Natural Language Actions and  Video States"
+    ],
+    "iclr_topic_90": [
+        "2308.13137",
+        "OmniQuant: Omnidirectionally Calibrated Quantization for Large Language  Models"
+    ],
+    "iclr_topic_91": [
+        "2309.13788",
+        "Can LLM-Generated Misinformation Be Detected?"
+    ],
+    "iclr_topic_92": [
+        "2404.08382",
+        "Look at the Text: Instruction-Tuned Language Models are More Robust  Multiple Choice Selectors than You Think"
+    ],
+    "iclr_topic_93": [
+        "2310.04363",
+        "Amortizing intractable inference in large language models"
+    ],
+    "iclr_topic_94": [
+        "2408.00655",
+        "SentenceVAE: Enable Next-sentence Prediction for Large Language Models  with Faster Speed, Higher Accuracy and Longer Context"
+    ],
+    "iclr_topic_95": [
+        "2307.16368",
+        "AntGPT: Can Large Language Models Help Long-term Action Anticipation  from Videos?"
+    ],
+    "iclr_topic_96": [
+        "2310.04560",
+        "Talk like a Graph: Encoding Graphs for Large Language Models"
+    ],
+    "iclr_topic_97": [
+        "2309.14393",
+        "LLMCarbon: Modeling the end-to-end Carbon Footprint of Large Language  Models"
+    ],
+    "iclr_topic_98": [
+        "2312.03633",
+        "Exploring the Reversal Curse and Other Deductive Logical Reasoning in  BERT and GPT-Based Large Language Models"
+    ],
+    "iclr_topic_99": [
+        "2310.13289",
+        "SALMONN: Towards Generic Hearing Abilities for Large Language Models"
+    ],
+    "iclr_topic_100": [
+        "2409.08111",
+        "Towards a graph-based foundation model for network traffic analysis"
+    ],
+    "iclr_topic_101": [
+        "2406.05498",
+        "SelfDefend: LLMs Can Defend Themselves against Jailbreaking in a  Practical Manner"
+    ],
+    "iclr_topic_102": [
+        "2308.08493",
+        "Time Travel in LLMs: Tracing Data Contamination in Large Language Models"
+    ],
+    "iclr_topic_103": [
+        "2306.05087",
+        "PandaLM: An Automatic Evaluation Benchmark for LLM Instruction Tuning  Optimization"
+    ],
+    "iclr_topic_104": [
+        "2310.04451",
+        "AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language  Models"
+    ],
+    "iclr_topic_105": [
+        "2310.02129",
+        "Unveiling the Pitfalls of Knowledge Editing for Large Language Models"
+    ],
+    "iclr_topic_106": [
+        "2310.06987",
+        "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation"
+    ],
+    "iclr_topic_107": [
+        "2310.01557",
+        "SmartPlay: A Benchmark for LLMs as Intelligent Agents"
+    ],
+    "iclr_topic_108": [
+        "2305.11738",
+        "CRITIC: Large Language Models Can Self-Correct with Tool-Interactive  Critiquing"
+    ],
+    "iclr_topic_109": [
+        "2409.00997",
+        "DataSculpt: Crafting Data Landscapes for LLM Post-Training through  Multi-objective Partitioning"
+    ]
+}

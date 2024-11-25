@@ -1,0 +1,82 @@
+{
+    "topic_1": [
+        "2304.11406",
+        "Automatic Library Migration Using Large Language Models: First Results"
+    ],
+    "topic_6": [
+        "2310.05492",
+        "How Abilities in Large Language Models are Affected by Supervised  Fine-tuning Data Composition"
+    ],
+    "topic_10": [
+        "2311.09096",
+        "Defending Large Language Models Against Jailbreaking Attacks Through  Goal Prioritization"
+    ],
+    "topic_25": [
+        "2407.10275",
+        "Cross-Lingual Multi-Hop Knowledge Editing -- Benchmarks, Analysis and a  Simple Contrastive Learning based Approach"
+    ],
+    "topic_31": [
+        "2409.07314",
+        "MEDIC: Towards a Comprehensive Framework for Evaluating LLMs in Clinical  Applications"
+    ],
+    "topic_23": [
+        "2405.04180",
+        "Sora Detector: A Unified Hallucination Detection for Large Text-to-Video  Models"
+    ],
+    "topic_11": [
+        "2311.09278",
+        "Symbol-LLM: Towards Foundational Symbol-centric Interface For Large  Language Models"
+    ],
+    "cvpr_topic_7": [
+        "2311.08046",
+        "Chat-UniVi: Unified Visual Representation Empowers Large Language Models  with Image and Video Understanding"
+    ],
+    "cvpr_topic_1": [
+        "2312.07488",
+        "LMDrive: Closed-Loop End-to-End Driving with Large Language Models"
+    ],
+    "cvpr_topic_11": [
+        "2312.06739",
+        "SmartEdit: Exploring Complex Instruction-based Image Editing with  Multimodal Large Language Models"
+    ],
+    "cvpr_topic_2": [
+        "2312.14233",
+        "VCoder: Versatile Vision Encoders for Multimodal Large Language Models"
+    ],
+    "cvpr_topic_9": [
+        "2311.16926",
+        "LLaFS: When Large Language Models Meet Few-Shot Segmentation"
+    ],
+    "cvpr_topic_12": [
+        "2312.10103",
+        "GSVA: Generalized Segmentation via Multimodal Large Language Models"
+    ],
+    "cvpr_topic_6": [
+        "2402.16846",
+        "GROUNDHOG: Grounding Large Language Models to Holistic Segmentation"
+    ],
+    "iclr_topic_34": [
+        "2408.10174",
+        "SMILE: Zero-Shot Sparse Mixture of Low-Rank Experts Construction From  Pre-Trained Foundation Models"
+    ],
+    "iclr_topic_64": [
+        "2308.07201",
+        "ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate"
+    ],
+    "iclr_topic_19": [
+        "2309.12307",
+        "LongLoRA: Efficient Fine-tuning of Long-Context Large Language Models"
+    ],
+    "iclr_topic_53": [
+        "2309.03883",
+        "DoLa: Decoding by Contrasting Layers Improves Factuality in Large  Language Models"
+    ],
+    "iclr_topic_32": [
+        "2309.08532",
+        "Connecting Large Language Models with Evolutionary Algorithms Yields  Powerful Prompt Optimizers"
+    ],
+    "iclr_topic_90": [
+        "2308.13137",
+        "OmniQuant: Omnidirectionally Calibrated Quantization for Large Language  Models"
+    ]
+}

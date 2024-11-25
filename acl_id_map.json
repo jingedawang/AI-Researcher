@@ -1,0 +1,126 @@
+{
+    "topic_1": [
+        "2304.11406",
+        "LaMP: When Large Language Models Meet Personalization"
+    ],
+    "topic_2": [
+        "2305.15541",
+        "Harnessing the Power of Large Language Models for Natural Language to  First-Order Logic Translation"
+    ],
+    "topic_3": [
+        "2308.09729",
+        "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large  Language Models"
+    ],
+    "topic_4": [
+        "2309.01809",
+        "Are Emergent Abilities in Large Language Models just In-Context  Learning?"
+    ],
+    "topic_5": [
+        "2309.17272",
+        "Enhancing Large Language Models in Coding Through Multi-Perspective  Self-Consistency"
+    ],
+    "topic_6": [
+        "2310.05492",
+        "How Abilities in Large Language Models are Affected by Supervised  Fine-tuning Data Composition"
+    ],
+    "topic_7": [
+        "2310.12481",
+        "Not All Countries Celebrate Thanksgiving: On the Cultural Dominance in  Large Language Models"
+    ],
+    "topic_8": [
+        "2311.04155",
+        "Black-Box Prompt Optimization: Aligning Large Language Models without  Model Training"
+    ],
+    "topic_9": [
+        "2311.08011",
+        "Forgetting before Learning: Utilizing Parametric Arithmetic for  Knowledge Updating in Large Language Models"
+    ],
+    "topic_10": [
+        "2311.09096",
+        "Defending Large Language Models Against Jailbreaking Attacks Through  Goal Prioritization"
+    ],
+    "topic_11": [
+        "2311.09278",
+        "Symbol-LLM: Towards Foundational Symbol-centric Interface For Large  Language Models"
+    ],
+    "topic_12": [
+        "2311.10227",
+        "Think Twice: Perspective-Taking Improves Large Language Models'  Theory-of-Mind Capabilities"
+    ],
+    "topic_13": [
+        "2311.15296",
+        "UHGEval: Benchmarking the Hallucination of Chinese Large Language Models  via Unconstrained Generation"
+    ],
+    "topic_14": [
+        "2311.18743",
+        "AlignBench: Benchmarking Chinese Alignment of Large Language Models"
+    ],
+    "topic_15": [
+        "2312.14890",
+        "NPHardEval: Dynamic Benchmark on Reasoning Ability of Large Language  Models via Complexity Classes"
+    ],
+    "topic_16": [
+        "2312.15997",
+        "Aligning Large Language Models with Human Preferences through  Representation Engineering"
+    ],
+    "topic_17": [
+        "2401.03205",
+        "The Dawn After the Dark: An Empirical Study on Factuality Hallucination  in Large Language Models"
+    ],
+    "topic_18": [
+        "2401.07286",
+        "CANDLE: Iterative Conceptualization and Instantiation Distillation from  Large Language Models for Commonsense Reasoning"
+    ],
+    "topic_19": [
+        "2401.12474",
+        "Large Language Models are Superpositions of All Characters: Attaining  Arbitrary Role-play via Self-Alignment"
+    ],
+    "topic_20": [
+        "2402.12786",
+        "Advancing Large Language Models to Capture Varied Speaking Styles and  Respond Properly in Spoken Conversations"
+    ],
+    "topic_21": [
+        "2402.14007",
+        "Can Watermarks Survive Translation? On the Cross-lingual Consistency of  Text Watermark for Large Language Models"
+    ],
+    "topic_22": [
+        "2402.16837",
+        "Do Large Language Models Latently Perform Multi-Hop Reasoning?"
+    ],
+    "topic_23": [
+        "2405.04180",
+        "Sora Detector: A Unified Hallucination Detection for Large Text-to-Video  Models"
+    ],
+    "topic_24": [
+        "2406.14711",
+        "MultiAgent Collaboration Attack: Investigating Adversarial Attacks in  Large Language Model Collaborations via Debate"
+    ],
+    "topic_25": [
+        "2407.10275",
+        "Cross-Lingual Multi-Hop Knowledge Editing -- Benchmarks, Analysis and a  Simple Contrastive Learning based Approach"
+    ],
+    "topic_26": [
+        "2408.02143",
+        "Analyzing Cultural Representations of Emotions in LLMs through Mixed  Emotion Survey"
+    ],
+    "topic_27": [
+        "2408.16151",
+        "Automatic Library Migration Using Large Language Models: First Results"
+    ],
+    "topic_28": [
+        "2409.00101",
+        "NeuroLM: A Universal Multi-task Foundation Model for Bridging the Gap  between Language and EEG Signals"
+    ],
+    "topic_29": [
+        "2409.04475",
+        "Revolutionizing Database Q&A with Large Language Models: Comprehensive  Benchmark and Evaluation"
+    ],
+    "topic_30": [
+        "2409.04561",
+        "Dual-Level Cross-Modal Contrastive Clustering"
+    ],
+    "topic_31": [
+        "2409.07314",
+        "MEDIC: Towards a Comprehensive Framework for Evaluating LLMs in Clinical  Applications"
+    ]
+}

@@ -16,7 +16,7 @@ def idea_generation(method, existing_ideas, paper_bank, grounding_k, examples, i
     random.shuffle(top_papers)
     grounding_papers = top_papers[ : grounding_k]
 
-    prompt = "You are an expert researcher in Large Language Models. Now I want you to help me brainstorm some new research project ideas on the topic of: " + topic_description + ".\n\n"
+    prompt = "You are an expert researcher in Natural Language Processing, Large Language Models and Computer Vision. Now I want you to help me brainstorm some new research project ideas on the topic of: " + topic_description + ".\n\n"
     if RAG:
         prompt += "Here are some relevant papers on this topic just for your background knowledge:\n" + format_papers_for_printing(grounding_papers, include_score=False, include_id=False) + "\n"
     prompt += "You should generate {} different ideas on this topic. Try to be creative and diverse in the idea generation, and do not repeat any similar ideas. ".format(str(ideas_n))
@@ -72,24 +72,24 @@ if __name__ == "__main__":
         from openai import AzureOpenAI
         client = AzureOpenAI(
             azure_endpoint = "https://westlakeaustraliaeast.openai.azure.com/", 
-            api_key= '026d6f9678244ba0b96fbdc0770b4941',  
+            api_key= os.environ["AZURE_API_KEY"],
             api_version="2024-02-15-preview"
         )
     
     with open(args.paper_cache, "r") as f:
         lit_review = json.load(f)
     
-    topic_description = f'{lit_review[0]["title"]}. {lit_review[0]["abstract"]}'
-    paper_bank = lit_review[0]["retrieved_papers"]
+    topic_description = lit_review['topic_description']
+    paper_bank = lit_review['paper_bank']
 
     ## cache dir and file
     if args.RAG == "True":
         # ideas_file = args.idea_cache.replace(".json", "_RAG.json")
         ideas_file = args.idea_cache
-        print ("RAG is enabled for idea generation")
+        # print ("RAG is enabled for idea generation")
     else:
         ideas_file = args.idea_cache
-        print ("RAG is disabled for idea generation")
+        # print ("RAG is disabled for idea generation")
     
     # try:
     ## extract existing ideas
@@ -111,14 +111,14 @@ if __name__ == "__main__":
             method_idea_examples = json.load(f)
             method_idea_examples = shuffle_dict_and_convert_to_string(method_idea_examples)
     
-    print ("topic: ", topic_description)
-    print ("existing ideas: ", existing_ideas)
-    print ("\n")
-    print ("generating {} ideas...".format(str(args.ideas_n)))
+    # print ("topic: ", topic_description)
+    # print ("existing ideas: ", existing_ideas)
+    # print ("\n")
+    # print ("generating {} ideas...".format(str(args.ideas_n)))
     
     prompt, response, cost = idea_generation(args.method, existing_ideas, paper_bank, args.grounding_k, method_idea_examples, args.ideas_n, topic_description, client, args.engine, args.seed)
     
-    print ("idea generation cost: ", cost)
+    # print ("idea generation cost: ", cost)
 
     response = json.loads(response.strip())
     ideas = {"topic_description": topic_description, "ideas": [response]}
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         ideas_cache["ideas"].append(response)
         ideas = ideas_cache
     
-    print ("#ideas generated so far: ", sum(len(d) for d in ideas["ideas"]))
+    # print ("#ideas generated so far: ", sum(len(d) for d in ideas["ideas"]))
 
     ## save the cache
     cache_dir = os.path.dirname(ideas_file)
